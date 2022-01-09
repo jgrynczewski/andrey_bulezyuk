@@ -20,54 +20,43 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                      <li class="nav-item ml-2">
+                          <a href="{% url 'advice:question_create' %}" class="nav-link btn btn-light text-dark">Ask Question</a>
+                      </li>
+                  <li class="nav-item ml-2">
+                      <a href="{% url 'blog_create' %}" class="nav-link btn btn-dark">Write a Blog</a>
+                  </li>
+              </ul>
 
-              {% comment %}
-          <ul class="navbar-nav">
-            <li class="nav-item ml-2">
-              <a href="{% url 'question_create' %}" class="nav-link btn btn-light text-dark">Ask Question</a>
-          </li>
-            <li class="nav-item ml-2">
-              <a href="{% url 'blog_create' %}" class="nav-link btn btn-dark">Write a Blog</a>
-            </li>
-
-          </ul>
-              {% endcomment %}
-
-          <ul class="navbar-nav ml-auto">
+              <ul class="navbar-nav ml-auto">
               {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                      <a href="{% url 'profiles:profile' request.user.pk %}" class="nav-link">Profile</a>
+                  </li>
 
-              <li class="nav-item">
-                  <a href="{% url 'profiles:profile' request.user.pk %}" class="nav-link">Profile</a>
-              </li>
-
-              <li class="nav-item">
-                  <a href="{% url 'profiles:logout' %}" class="nav-link">Logout</a>
-              </li>
+                  <li class="nav-item">
+                      <a href="{% url 'profiles:logout' %}" class="nav-link">Logout</a>
+                  </li>
               {% else %}
-              <li class="nav-item">
-                  <a href="{% url 'profiles:login' %}" class="nav-link">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a href="{% url 'profiles:register' %}" class="nav-link">Register</a>
-              </li>
+                  <li class="nav-item">
+                      <a href="{% url 'profiles:login' %}" class="nav-link">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{% url 'profiles:register' %}" class="nav-link">Register</a>
+                  </li>
               {% endif %}
-{% comment %}
               <li class="nav-item">
-                <a href="{% url 'question_list' %}" class="nav-link">Browse Questions</a>
-            </li>
-{% endcomment %}
+                <a href="{% url 'advice:question_list' %}" class="nav-link">Browse Questions</a>
+              </li>
           </ul>
           </div>
-
           </div>
         </nav>
   </header>
 
-
 {% block content %}
-
 {% endblock content %}
-
 
 {% if messages %}
   {% for message in messages %}
@@ -86,6 +75,5 @@
 
     {% block js %}
     {% endblock js %}
-
   </body>
 </html>
